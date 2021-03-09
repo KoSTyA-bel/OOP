@@ -1,17 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OOP.Model
+﻿namespace OOP.Model
 {
-    public abstract class Student
+    public class Student
     {
-        protected string _name;
-        protected int _age;
-        protected double _mark;
+        public const int MAX_AGE = 130;
+        public const int MIN_AGE = 0;
+        public const int MAX_MARK = 10;
+        public const int MIN_MARK = 0;
 
-        public virtual string Name { get => _name; set => _name = value; }
-        public virtual int Age { get => _age; set => _age = value; }
-        public virtual double Mark { get => _mark; set => _mark = value; }
+        private string _name;
+        private int _age;
+        private double _mark;
+
+        public string Name { get => _name; set => _name = value; }
+
+        public int Age
+        {
+            get => _age;
+            set
+            {
+                if (value >= MIN_AGE && value <= MAX_AGE)
+                {
+                    _age = value;
+                }
+            }
+        }
+        public double Mark
+        {
+            get => _mark;
+            set
+            {
+                if (value >= MIN_MARK && value <= MAX_MARK)
+                {
+                    _mark = value;
+                }
+            }
+        }
+
+        public Student(string name, int age, double mark)
+        {
+            Name = name;
+            Age = age;
+            Mark = mark;
+        }
+
+        public override string ToString()
+        {
+            return $"{Name}: age = {_age}, mark = {_mark}";
+        }
     }
 }

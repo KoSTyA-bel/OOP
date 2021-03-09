@@ -8,7 +8,7 @@ namespace OOP.Model
     {
         public override Student MakeStudent(string name, int age, double mark)
         {
-            return new Boy(name, age, mark);
+            return new Student(name, age, mark);
         }
     }
 }
