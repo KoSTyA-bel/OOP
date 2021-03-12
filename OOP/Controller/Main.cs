@@ -1,23 +1,18 @@
 ﻿using OOP.Model;
 using OOP.Utils;
 using OOP.View;
-using System.Collections.Generic;
+using System.Threading;
 
 namespace OOP
 {
     class Program
     {
-        static void Main(string[] args)
+        static void SecondMain(object message)
         {
-            School school = new School();
-            Group group = new Group();
-
-            group.AddStudent(school.MakeStudent("kirill", 20, 7.5));
-            group.AddStudent(school.MakeStudent("lexa", 18, 6));
-            group.AddStudent(school.MakeStudent("kostya", 9, 10));
+            Group group = message as Group;
 
             double avr = Mananger.GetAverageMark(group.Students);
-            
+
             Printer.PrintLine(avr.ToString());
 
             Printer.PrintLine("\nGood students:");
@@ -27,6 +22,20 @@ namespace OOP
             Printer.PrintLine("\nBad students:");
             Printer.PrintLine(Converter.ConvertToStudentsString(
                 Mananger.GetListOfStudentsBy(group.Students, avr, (studentMark, mark) => studentMark < mark)));
+        }
+
+        static void Main(string[] args)
+        {
+            Thread thread = new Thread(SecondMain);
+
+            School school = new School();
+            Group group = new Group();
+
+            group.AddStudent(school.MakeStudent("kirill", 20, 7.5));
+            group.AddStudent(school.MakeStudent("lexa", 18, 6));
+            group.AddStudent(school.MakeStudent("kostya", 9, 10));
+
+            thread.Start(group);
         }
     }
 }
