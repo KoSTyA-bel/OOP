@@ -7,7 +7,7 @@ namespace OOP
 {
     class Program
     {
-        static void SecondMain(object message)
+        static void WorkWithGroup(object message)
         {
             Group group = message as Group;
 
@@ -26,7 +26,7 @@ namespace OOP
 
         static void Main(string[] args)
         {
-            Thread thread = new Thread(SecondMain);
+            Thread thread = new Thread(WorkWithGroup);
 
             School school = new School();
             Group group = new Group();
@@ -36,6 +36,8 @@ namespace OOP
             group.AddStudent(school.MakeStudent("kostya", 9, 10));
 
             thread.Start(group);
+
+            //тута выполняет что-то другое
         }
     }
 }
